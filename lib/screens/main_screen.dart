@@ -83,14 +83,14 @@ class _MainScreenState extends State<MainScreen> {
                               await launch(pmrRegistrationUrl);
                           },
                           child: Material(
-                            elevation: 20,
+                            elevation: 10,
                             shape: CircleBorder(),
-                            child: SvgPicture.asset(
-                              'assets/3_people.svg',
-                              width: 20,
-                              color: color_primary,
-                              height: 30,
-                              semanticsLabel: 'PMR Logo',
+                            child: Image.asset(
+                              'assets/main_logo.png',
+                              width: 40,
+                              // color: color_primary,
+                              height: 40,
+                              // semanticsLabel: 'PMR Logo',
                             ),
                             borderOnForeground: true,
                           ),

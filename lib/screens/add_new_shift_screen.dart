@@ -4,6 +4,7 @@ import 'package:pmr_staff/components/custom_edit_text.dart';
 import 'package:pmr_staff/components/employee_screen/comment_widget.dart';
 import 'package:pmr_staff/components/employee_screen/hourly_rate.dart';
 import 'package:pmr_staff/components/employee_screen/shift_duration.dart';
+import 'package:pmr_staff/components/employee_screen/unpaid_break_widget.dart';
 import 'package:pmr_staff/components/info_alert_dialog.dart';
 import 'package:pmr_staff/constants/colors.dart';
 import 'package:pmr_staff/models/db/shift_group.dart';
@@ -15,8 +16,6 @@ import 'package:pmr_staff/controller/database_helper.dart';
 import 'package:pmr_staff/utility/shared_pref_util.dart';
 import 'package:pmr_staff/utility/ui_functions.dart';
 import 'package:provider/provider.dart';
-
-import 'employer_signin_screen.dart';
 
 class AddNewShiftScreen extends StatefulWidget {
   AddNewShiftScreen({
@@ -121,17 +120,27 @@ class _AddNewShiftScreenState extends State<AddNewShiftScreen> {
                   // CustomChecker(),
                   SizedBox(height: 15),
                   ShiftTimeWidget(),
-                  HourlyRateWidget(),
+                  UnpaidBreakWidget(
+                    currentText: taskData.getBreakTime(),
+                    onTextChanged: (newBreak) {
+                      taskData.setBreakTime(newBreak);
+                    },
+                  ),
+                  HourlyRateWidget(
+                    currentText: taskData.getHourlyRate(),
+                    onTextChanged: (newRate) {
+                      taskData.setHourlyRate(newRate);
+                    },
+                  ),
                   SizedBox(height: 35),
                   // Comment
                   CommentWidget(
                     mainText: 'Comment',
                     hint: 'e.g Manager was excellent!',
-                    currentText: 'No Comment!',
+                    currentText: taskData.getComment(),
                     maxLength: 100,
                     onCommentChanged: (newComment) {
-                      Provider.of<EmployeeScreenData>(context, listen: false)
-                          .setComment(newComment);
+                      taskData.setComment(newComment);
                     },
                   ),
                   SizedBox(height: 15),

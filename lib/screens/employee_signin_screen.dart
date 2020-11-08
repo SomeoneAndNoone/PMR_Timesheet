@@ -106,6 +106,7 @@ class _EmployeeSigninScreenState extends State<EmployeeSigninScreen> {
                     mainText: 'Job Position',
                     hint: 'e.g. Concierge',
                     maxLength: 50,
+                    currentText: taskData.getJobPosition(),
                     onTextChanged: (newText) {
                       taskData.setJobPosition(newText);
                     },
