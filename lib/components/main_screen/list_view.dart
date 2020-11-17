@@ -14,8 +14,10 @@ class MainScreenList extends StatelessWidget {
     @required this.setItemAsSelectedOnPress,
     @required this.isInSelectableState,
     @required this.sendToPayroll,
+    this.onClosedCallback,
   });
 
+  final Function onClosedCallback;
   final Function sendToPayroll;
   final bool isInSelectableState;
   final Function setItemAsSelectedOnPress;
@@ -46,7 +48,7 @@ class MainScreenList extends StatelessWidget {
               sendToPayrollFunc: sendToPayroll,
             );
           },
-          // onClosed: _showMarkedAsDoneSnackbar,
+          onClosed: onClosedCallback,
         );
       },
       itemCount: scheduledShifts.length,

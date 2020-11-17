@@ -303,6 +303,7 @@ class _MainScreenState extends State<MainScreen> {
                               moveToHistoryFunc: moveToHistory,
                               scheduledShifts: scheduledShifts,
                               sendToPayroll: sendToPayroll,
+                              onClosedCallback: onClosedFunc,
                             ),
                     ),
                   ],
@@ -311,6 +312,11 @@ class _MainScreenState extends State<MainScreen> {
             ),
           ],
         ));
+  }
+
+  void onClosedFunc(bool shouldUpdate) {
+    updateScheduledShifts();
+    setState(() {});
   }
 
   bool isItemSelected(ShiftGroupModel shiftGroupModel) {

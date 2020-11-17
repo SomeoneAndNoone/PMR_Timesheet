@@ -177,7 +177,9 @@ class _EmployeeSigninScreenState extends State<EmployeeSigninScreen> {
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) => EmployerSignInScreen(
-                                        employeeData: taskData),
+                                      employeeData: taskData,
+                                      siteNameSuggestions: siteNameSuggestions,
+                                    ),
                                   ),
                                 );
                               }

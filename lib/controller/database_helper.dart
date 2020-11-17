@@ -265,7 +265,7 @@ class DatabaseHelperImpl implements DatabaseHelper {
     final List<Map<String, dynamic>> maps = await db.query(
       scheduledShiftGroupsTableName,
       where: 'uniqueGroupId = ?',
-      orderBy: "date ASC",
+      orderBy: "name ASC",
       whereArgs: [shiftGroupModel.uniqueGroupId],
     );
 
