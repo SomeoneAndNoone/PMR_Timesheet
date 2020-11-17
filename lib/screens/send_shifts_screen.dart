@@ -88,13 +88,16 @@ class _SendShiftsScreenState extends State<SendShiftsScreen> {
 
   Future<Uint8List> generateShifts(PdfPageFormat pageFormat) async {
     await generateNecessaryVars();
+    String street = await getStreetAddress();
+    String postCode = await getPostCode();
+    String city = await getCityName();
 
     final timeSheet = TimeSheet(
       totalHours: getTotalHours(),
       shiftGroupsForSummary: shiftGroupsForSummary,
       sitesPdfModel: sitesPdfModel,
       employeeName: await getFullNameSharedPrefs(),
-      staffAddress: '147 Chrisp Street,\nPoplar, London, E14 6NH',
+      staffAddress: '$street,\n$city, $postCode',
     );
 
     PdfPageFormat mPageFormat = PdfPageFormat.a4;

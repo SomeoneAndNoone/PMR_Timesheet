@@ -40,7 +40,7 @@ Future<void> setStreetAddress(String newAddress) async {
   await prefs.setString(STREET_ADDRESS_KEY, newAddress);
 }
 
-Future<String> getStreetAddressKey() async {
+Future<String> getStreetAddress() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   return prefs.getString(STREET_ADDRESS_KEY);
 }

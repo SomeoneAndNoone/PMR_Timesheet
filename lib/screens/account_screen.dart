@@ -27,7 +27,7 @@ class _AccountScreenState extends State<AccountScreen> {
       fullName: await getFullNameSharedPrefs(),
       address: await getAddressSharedPrefs(),
       payrollEmail: await getPayrollEmailSharedPrefs(),
-      streetAddress: await getStreetAddressKey(),
+      streetAddress: await getStreetAddress(),
       postCode: await getPostCode(),
       cityName: await getCityName(),
     );
