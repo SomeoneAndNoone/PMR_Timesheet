@@ -194,7 +194,16 @@ class _MainScreenState extends State<MainScreen> {
                         child: MaterialButton(
                           onPressed: scheduledShifts.length == 0
                               ? null
-                              : sendScheduledShifts,
+                              : () {
+                                  if (!_isSelectedState) {
+                                    print("Scheduled Shifts");
+                                    sendScheduledShifts();
+                                  } else {
+                                    print(
+                                        "Selected Shifts Size = ${selectedShifts.length}");
+                                    sendSelectedShifts();
+                                  }
+                                },
                           disabledColor: Colors.grey,
                           color: color_primary,
                           child: Text(
@@ -293,6 +302,7 @@ class _MainScreenState extends State<MainScreen> {
                               isItemSelected: isItemSelected,
                               moveToHistoryFunc: moveToHistory,
                               scheduledShifts: scheduledShifts,
+                              sendToPayroll: sendToPayroll,
                             ),
                     ),
                   ],
@@ -348,6 +358,17 @@ class _MainScreenState extends State<MainScreen> {
     updateScheduledShifts();
   }
 
+  void sendToPayroll(ShiftGroupModel shiftGroupModel) async {
+    final bool shouldUpdate = await Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => SendShiftsScreen(
+          scheduledShifts: [shiftGroupModel],
+        ),
+      ),
+    );
+  }
+
   void updateScheduledShifts() {
     DbInstance.dbHelper.getScheduledShiftModels().then((value) {
       scheduledShifts = value;
@@ -397,13 +418,10 @@ class _MainScreenState extends State<MainScreen> {
 //
 //
 //
-
 //
 //
 //
 //
-//
-
 //
 //
 //

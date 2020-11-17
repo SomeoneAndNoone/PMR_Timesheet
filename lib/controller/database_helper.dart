@@ -24,6 +24,8 @@ abstract class DatabaseHelper {
 
   Future<void> deleteShiftModel(SingleShiftModel shiftModel);
 
+  Future<ShiftGroupModel> getShiftGroupModel(ShiftGroupModel shiftGroupModel);
+
   Future<void> updateScheduledShiftIncome(ShiftGroupModel shiftGroupModel);
 
   Future<void> moveShiftGroupToHistoryFromScheduled(
@@ -254,6 +256,25 @@ class DatabaseHelperImpl implements DatabaseHelper {
       maps.length,
       (i) => SingleShiftModel.toShiftModelObject(maps[i]),
     );
+  }
+
+  @override
+  Future<ShiftGroupModel> getShiftGroupModel(
+      ShiftGroupModel shiftGroupModel) async {
+    Database db = await database;
+    final List<Map<String, dynamic>> maps = await db.query(
+      scheduledShiftGroupsTableName,
+      where: 'uniqueGroupId = ?',
+      orderBy: "date ASC",
+      whereArgs: [shiftGroupModel.uniqueGroupId],
+    );
+
+    List<ShiftGroupModel> list = List.generate(
+      maps.length,
+      (i) => ShiftGroupModel.toShiftGroupModelObject(maps[i]),
+    );
+    if (list.length >= 1) return list[0];
+    return null;
   }
 
   @override

@@ -100,6 +100,10 @@ class _SingleShiftsScreenState extends State<SingleShiftsScreen> {
   }
 
   void updateData() {
+    DbInstance.dbHelper.getShiftGroupModel(shiftGroupModel).then((value) {
+      shiftGroupModel = value;
+    });
+
     DbInstance.dbHelper
         .getShiftModelsForParticularGroup(shiftGroupModel.uniqueGroupId)
         .then((mShifts) {

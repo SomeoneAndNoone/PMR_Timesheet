@@ -13,8 +13,10 @@ class MainScreenList extends StatelessWidget {
     @required this.setAsSelectedOnLongPress,
     @required this.setItemAsSelectedOnPress,
     @required this.isInSelectableState,
+    @required this.sendToPayroll,
   });
 
+  final Function sendToPayroll;
   final bool isInSelectableState;
   final Function setItemAsSelectedOnPress;
   final Function isItemSelected;
@@ -41,6 +43,7 @@ class MainScreenList extends StatelessWidget {
               setAsSelectedOnLongPress: setAsSelectedOnLongPress,
               openContainerCallback: openContainer,
               shiftGroupModel: scheduledShifts[index],
+              sendToPayrollFunc: sendToPayroll,
             );
           },
           // onClosed: _showMarkedAsDoneSnackbar,

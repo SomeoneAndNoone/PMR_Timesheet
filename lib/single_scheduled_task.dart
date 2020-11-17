@@ -16,8 +16,10 @@ class SingleScheduledTaskWidget extends StatelessWidget {
     this.setAsSelectedOnLongPress,
     this.setItemAsSelectedOnPress,
     this.isInSelectableState,
+    @required this.sendToPayrollFunc,
   });
 
+  final Function sendToPayrollFunc;
   final ShiftGroupModel shiftGroupModel;
   final VoidCallback openContainerCallback;
   final Function moveToHistoryFunc;
@@ -75,6 +77,8 @@ class SingleScheduledTaskWidget extends StatelessWidget {
                             showSnackbar(context,
                                 '${shiftGroupModel.name} moved to History');
                             break;
+                          case 1:
+                            sendToPayrollFunc(shiftGroupModel);
                         }
                         print(value);
                       },

@@ -19,9 +19,13 @@ import 'package:provider/provider.dart';
 import 'package:signature/signature.dart';
 
 class EmployerSignInScreen extends StatefulWidget {
-  EmployerSignInScreen({this.employeeData});
+  EmployerSignInScreen({
+    @required this.employeeData,
+    @required this.siteNameSuggestions,
+  });
 
   final EmployeeScreenData employeeData;
+  final List<String> siteNameSuggestions;
 
   @override
   _EmployerSignInScreenState createState() => _EmployerSignInScreenState();
@@ -46,6 +50,7 @@ class _EmployerSignInScreenState extends State<EmployerSignInScreen> {
   String jobPosition;
   String permStaffName;
   final accentStyle = TextStyle(color: color_accent);
+  List<String> siteNameSuggestions;
 
   final SignatureController _controller = SignatureController(
     penStrokeWidth: 3,
@@ -56,6 +61,7 @@ class _EmployerSignInScreenState extends State<EmployerSignInScreen> {
   @override
   void initState() {
     super.initState();
+    siteNameSuggestions = widget.siteNameSuggestions;
     initializeVars();
   }
 
@@ -374,7 +380,8 @@ class _EmployerSignInScreenState extends State<EmployerSignInScreen> {
       ),
     );
 
-    await DbInstance.dbHelper.insertSiteNameSuggestion(siteName);
+    if (!siteNameSuggestions.contains(siteName.trim()))
+      await DbInstance.dbHelper.insertSiteNameSuggestion(siteName.trim());
   }
 
   double getWorkedHours({
